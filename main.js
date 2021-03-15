@@ -35,7 +35,67 @@ $(document).ready(function(){
                     function(){
                         esconderColumna("1");
                     }
-                )
+                );
+                $("#col-2").click(
+                    function(){
+                        esconderColumna("2");
+                    }
+                );
+                $("#col-3").click(
+                    function(){
+                        esconderColumna("3");
+                    }
+                );
+                $("#col-4").click(
+                    function(){
+                        esconderColumna("4");
+                    }
+                );
+                $("#col-5").click(
+                    function(){
+                        esconderColumna("5");
+                    }
+                );
+                $("#col-6").click(
+                    function(){
+                        esconderColumna("6");
+                    }
+                );
+                $("#col-7").click(
+                    function(){
+                        esconderColumna("7");
+                    }
+                );
+                $("#col-8").click(
+                    function(){
+                        esconderColumna("8");
+                    }
+                );
+                $("#col-9").click(
+                    function(){
+                        esconderColumna("9");
+                    }
+                );
+                $("#col-10").click(
+                    function(){
+                        esconderColumna("10");
+                    }
+                );
+                $("#col-11").click(
+                    function(){
+                        esconderColumna("11");
+                    }
+                );
+                $("#col-12").click(
+                    function(){
+                        esconderColumna("12");
+                    }
+                );
+                $("#col-13").click(
+                    function(){
+                        esconderColumna("13");
+                    }
+                );
         });
     }
 
@@ -180,12 +240,101 @@ $(document).ready(function(){
     }
     function esconderColumna(i){
         //var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
+        let aux = "";
+        let css = "";
+        switch(i){
 
-       switch(i){
            case "1":
-               let aux;
               // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
                columnas["Nombre"] = (columnas["Nombre"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Nombre"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "2":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Estado"] = (columnas["Estado"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Estado"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "3":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Tipo"] = (columnas["Tipo"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Tipo"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "4":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Acceso Silla Ruedas"] = (columnas["Acceso Silla Ruedas"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Acceso Silla Ruedas"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "5":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Superficie Cubierta"] = (columnas["Superficie Cubierta"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Superficie Cubierta"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "6":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Superficie Aire"] = (columnas["Superficie Aire"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Superficie Aire"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "7":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Superficie Solar"] = (columnas["Superficie Solar"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Superficie Solar"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "8":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Titularidad"] = (columnas["Titularidad"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Titularidad"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "9":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Provincia"] = (columnas["Provincia"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Provincia"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "10":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Municipio"] = (columnas["Municipio"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Municipio"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "11":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Entidad"] = (columnas["Entidad"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Entidad"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "12":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Orden"] = (columnas["Orden"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Orden"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
+           case "13":
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Referencia Catastral"] = (columnas["Referencia Catastral"]=="true") ? "false" : "true";
+               aux = "#col-" + i;
+               css = (columnas["Referencia Catastral"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               $(aux).css(css);
+               break;
        }
         console.log(columnas);
         mostrarTabla(items);
@@ -194,6 +343,19 @@ $(document).ready(function(){
 
     function resetBotones(){
         $("#col-1").off();
+        $("#col-2").off();
+        $("#col-3").off();
+        $("#col-4").off();
+        $("#col-5").off();
+        $("#col-6").off();
+        $("#col-7").off();
+        $("#col-8").off();
+        $("#col-9").off();
+        $("#col-10").off();
+        $("#col-11").off();
+        $("#col-12").off();
+        $("#col-13").off();
+
     }
 
 });
