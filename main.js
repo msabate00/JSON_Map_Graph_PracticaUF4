@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var items = [];
-    var columnas = ["Nombre","Estado","Tipo","Acceso Silla Ruedas", "Superficie Cubierta", "Superficie Aire", "Superficie Solar", "Titularidad", "Provincia", "Municipio", "Entidad", "Orden", "Referencia Catastral"];
+    var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
     var url2020 = "https://datosabiertos.dip-badajoz.es/dataset/ceb25e50-45cc-4b4c-8103-a4a3ba88fce1/resource/2c5fe5b5-34c0-443c-935e-299f7c0f5e5c/download/instalacionesdeportivas2020.geojson";
     var url2019 = "https://datosabiertos.dip-badajoz.es/datos/urbanismo-e-infraestructuras/instalaciones-deportivas/Instalaciones_Deportivas.geojson";
     console.log(columnas);
@@ -127,7 +127,7 @@ $(document).ready(function(){
          let st = "<table>";
         st += "<tr>";
         $.each(columnas, function(key, val){
-                    st+="<th>" + val + "</th>";
+                    st+="<th>" + key + "</th>";
                });
         st +="</tr>";
               // st += "<tr><th>Nombre</th><th>Estado</th><th>Tipo</th><th>Acceso Silla Ruedas</th><th>Superficie Cubierta</th><th>Superficie Aire</th><th>Superficie Solar</th><th>Titularidad</th><th>Provincia</th><th>Municipio</th><th>Entidad</th><th>Orden</th><th>Referencia Catastral</th></tr>";
@@ -135,7 +135,10 @@ $(document).ready(function(){
         $.each(a, function(key, val){
             st += "<tr>";
             $.each(columnas, function(key2, val2){
-                st+= "<td>" + a[key][val2] + "</td>";
+                if(val2 == "true"){
+                    st+= "<td>" + a[key][key2] + "</td>";
+                }
+
             });
             st += "</tr>";
             /*
