@@ -1,8 +1,9 @@
 $(document).ready(function(){
     var items = [];
+    var columnas = ["Nombre","Estado","Tipo","Acceso Silla Ruedas", "Superficie Cubierta", "Superficie Aire", "Superficie Solar", "Titularidad", "Provincia", "Municipio", "Entidad", "Orden", "Referencia Catastral"];
     var url2020 = "https://datosabiertos.dip-badajoz.es/dataset/ceb25e50-45cc-4b4c-8103-a4a3ba88fce1/resource/2c5fe5b5-34c0-443c-935e-299f7c0f5e5c/download/instalacionesdeportivas2020.geojson";
     var url2019 = "https://datosabiertos.dip-badajoz.es/datos/urbanismo-e-infraestructuras/instalaciones-deportivas/Instalaciones_Deportivas.geojson";
-
+    console.log(columnas);
 
     $("#2020").click(
         function(){
@@ -123,10 +124,21 @@ $(document).ready(function(){
 
     function mostrarTabla(a){
         $("table").remove();
-        let st = "<table>";
-               st += "<tr><th>Nombre</th><th>Estado</th><th>Tipo</th><th>Acceso Silla Ruedas</th><th>Superficie Cubierta</th><th>Superficie Aire</th><th>Superficie Solar</th><th>Titularidad</th><th>Provincia</th><th>Municipio</th><th>Entidad</th><th>Orden</th><th>Referencia Catastral</th></tr>";
+         let st = "<table>";
+        st += "<tr>";
+        $.each(columnas, function(key, val){
+                    st+="<th>" + val + "</th>";
+               });
+        st +="</tr>";
+              // st += "<tr><th>Nombre</th><th>Estado</th><th>Tipo</th><th>Acceso Silla Ruedas</th><th>Superficie Cubierta</th><th>Superficie Aire</th><th>Superficie Solar</th><th>Titularidad</th><th>Provincia</th><th>Municipio</th><th>Entidad</th><th>Orden</th><th>Referencia Catastral</th></tr>";
         contador = 0;
         $.each(a, function(key, val){
+            st += "<tr>";
+            $.each(columnas, function(key2, val2){
+                st+= "<td>" + a[key][val2] + "</td>";
+            });
+            st += "</tr>";
+            /*
             st+= "<tr>";
             st += "<td>" + a[key]["Nombre"]+"</td>";
             st += "<td>" + a[key]["Estado"]+"</td>";
@@ -141,7 +153,7 @@ $(document).ready(function(){
             st += "<td>" + a[key]["Entidad"]+"</td>";
             st += "<td>" + a[key]["Orden"]+"</td>";
             st += "<td>" + a[key]["Referencia Catastral"]+"</td>";
-            st += "</tr>";
+            st += "</tr>";*/
             contador++;
             if(contador >= 50){
                 return false;
