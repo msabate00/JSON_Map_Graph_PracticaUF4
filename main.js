@@ -3,7 +3,7 @@ $(document).ready(function(){
     var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
     var url2020 = "https://datosabiertos.dip-badajoz.es/dataset/ceb25e50-45cc-4b4c-8103-a4a3ba88fce1/resource/2c5fe5b5-34c0-443c-935e-299f7c0f5e5c/download/instalacionesdeportivas2020.geojson";
     var url2019 = "https://datosabiertos.dip-badajoz.es/datos/urbanismo-e-infraestructuras/instalaciones-deportivas/Instalaciones_Deportivas.geojson";
-    console.log(columnas);
+    //console.log(columnas);
 
     $("#2020").click(
         function(){
@@ -16,6 +16,9 @@ $(document).ready(function(){
 
 
     function peticio1(url){
+        resetBotones();
+        columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
+
         items = [];
         $.getJSON( url, function( data ) {
             $.each(data.features, function(key, val){
@@ -24,8 +27,15 @@ $(document).ready(function(){
         })
         .done(
             function(){
+
                 items = TransformarArray(items);
                 mostrarTabla(items);
+
+                $("#col-1").click(
+                    function(){
+                        esconderColumna("1");
+                    }
+                )
         });
     }
 
@@ -118,7 +128,7 @@ $(document).ready(function(){
 
             });
         }
-        console.log(transformado);
+        //console.log(transformado);
         return transformado;
     }
 
@@ -127,7 +137,10 @@ $(document).ready(function(){
          let st = "<table>";
         st += "<tr>";
         $.each(columnas, function(key, val){
-                    st+="<th>" + key + "</th>";
+            if(val == "true"){
+                st+="<th>" + key + "</th>";
+            }
+
                });
         st +="</tr>";
               // st += "<tr><th>Nombre</th><th>Estado</th><th>Tipo</th><th>Acceso Silla Ruedas</th><th>Superficie Cubierta</th><th>Superficie Aire</th><th>Superficie Solar</th><th>Titularidad</th><th>Provincia</th><th>Municipio</th><th>Entidad</th><th>Orden</th><th>Referencia Catastral</th></tr>";
@@ -164,6 +177,23 @@ $(document).ready(function(){
         });
         st += "</table>";
         $("body").append(st);
+    }
+    function esconderColumna(i){
+        //var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
+
+       switch(i){
+           case "1":
+               let aux;
+              // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
+               columnas["Nombre"] = (columnas["Nombre"]=="true") ? "false" : "true";
+       }
+        console.log(columnas);
+        mostrarTabla(items);
+
+    }
+
+    function resetBotones(){
+        $("#col-1").off();
     }
 
 });
