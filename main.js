@@ -23,34 +23,132 @@ $(document).ready(function(){
         })
         .done(
             function(){
-                $("table").remove();
-                let st = "<table>";
-               //st += "<tr><th>Acceso Silla de Ruedas</th><th>Codigo Municipio</th><th>Codigo Provincia</th><th>Entidad</th><th>Estado</th><th>Gestion</th><th>Nombre</th><th>Orden</th><th>Poblamiento</th><th>Referencia Catastral</th><th>Superficie Aire</th><th>Superficie Cubierta</th><th>Superficie Solar</th><th>Tipo de Instalacion</th><th>Titularidad</th></tr>";
-
-                st+="<tr>";
-
-                $.each(items[5].properties, function(key, val){
-                    st += "<th>" + key + "</th>";
-                })
-                st += "</tr>";
-
-                contador = 0;
-                $.each(items, function(key, val){
-                    st+= "<tr>";
-                    console.log(val);
-                    $.each(val.properties, function(key2, val2){
-                        st += "<td>" + val2 + "</td>";
-
-                       // console.log(val2);
-                    });
-                    st += "</tr>";
-                    contador++;
-                    if(contador >= 50){
-                        return false;
-                    }
-                });
-                st += "</table>";
-                $("body").append(st);
+                items = TransformarArray(items);
+                mostrarTabla(items);
         });
     }
+
+
+    function TransformarArray(a){
+        let transformado = [];
+        for(let i = 0; i<a.length; i++){
+            transformado.push(a[i].properties);
+        }
+
+        for(let i = 0; i<transformado.length; i++){
+            $.each(transformado[i], function(key, val){
+                if(key.includes("rovincia")){
+                    transformado[i]["Provincia"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("unicipio")){
+                    transformado[i]["Municipio"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("entidad")){
+                    transformado[i]["Entidad"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("poblamiento")){
+                   // transformado[i]["Provincia"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("orden")){
+                    transformado[i]["Orden"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("nombre")){
+                    transformado[i]["Nombre"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("tipo")){
+                    transformado[i]["Tipo"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("titular")){
+                    transformado[i]["Titularidad"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("gestion")){
+                    //transformado[i]["Provincia"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("ubierta")){
+                    transformado[i]["Superficie Cubierta"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("ire")){
+                    transformado[i]["Superficie Aire"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("olar")){
+                    transformado[i]["Superficie Solar"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("atastral")){
+
+                    if(val == null){
+                        val = "";
+                    }
+                    transformado[i]["Referencia Catastral"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("uedas")){
+                    transformado[i]["Acceso Silla Ruedas"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("estado")){
+                    transformado[i]["Estado"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("uri")){
+                    //transformado[i]["Estado"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("ba_identifier")){
+                    //transformado[i]["Estado"] = val;
+                    delete transformado[i][key];
+
+                }else if(key.includes("ba_observaciones")){
+                    //transformado[i]["Estado"] = val;
+                    delete transformado[i][key];
+
+                }
+
+            });
+        }
+        console.log(transformado);
+        return transformado;
+    }
+
+    function mostrarTabla(a){
+        $("table").remove();
+        let st = "<table>";
+               st += "<tr><th>Nombre</th><th>Estado</th><th>Tipo</th><th>Acceso Silla Ruedas</th><th>Superficie Cubierta</th><th>Superficie Aire</th><th>Superficie Solar</th><th>Titularidad</th><th>Provincia</th><th>Municipio</th><th>Entidad</th><th>Orden</th><th>Referencia Catastral</th></tr>";
+        contador = 0;
+        $.each(a, function(key, val){
+            st+= "<tr>";
+            st += "<td>" + a[key]["Nombre"]+"</td>";
+            st += "<td>" + a[key]["Estado"]+"</td>";
+            st += "<td>" + a[key]["Tipo"]+"</td>";
+            st += "<td>" + a[key]["Acceso Silla Ruedas"]+"</td>";
+            st += "<td>" + a[key]["Superficie Cubierta"]+"</td>";
+            st += "<td>" + a[key]["Superficie Aire"]+"</td>";
+            st += "<td>" + a[key]["Superficie Solar"]+"</td>";
+            st += "<td>" + a[key]["Titularidad"]+"</td>";
+            st += "<td>" + a[key]["Provincia"]+"</td>";
+            st += "<td>" + a[key]["Municipio"]+"</td>";
+            st += "<td>" + a[key]["Entidad"]+"</td>";
+            st += "<td>" + a[key]["Orden"]+"</td>";
+            st += "<td>" + a[key]["Referencia Catastral"]+"</td>";
+            st += "</tr>";
+            contador++;
+            if(contador >= 50){
+                return false;
+            }
+        });
+        st += "</table>";
+        $("body").append(st);
+    }
+
 });
