@@ -6,7 +6,69 @@
         <input id="2020" type="button" value="2020">
         <input id="2019" type="button" value="2019">
         <br><br>
-        <p>Esconder Columnas:</p>
+         <span>Filtros:</span><br>
+        <table id="tablaFiltros">
+            <tr>
+                <td><span>Estado</span></td>
+                <td>
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option value="Bueno">Bueno</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Malo">Malo</option>
+                    </select>
+                </td>
+                <td>...</td>
+                <td>Tipo</td>
+                <td>
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option>Pistas polideportivas</option>
+                        <option>Complejos polideportivos</option>
+                        <option>Terrenos de juego</option>
+                        <option>Gimnasio</option>
+                        <option>Piscinas al aire libre</option>
+                        <option>Piscinas cubiertas</option>
+                        <option>Otros</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><span>Acceso Silla de Ruedas</span></td>
+                <td>
+                    <select>
+                        <option value="">Seleccionar</option>
+                        <option>Si</option>
+                        <option>No</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><span>Superficie Cubierta Mayor de: </span></td>
+                <td><input type="number" id="cubiertamayor"></td>
+                <td>...</td>
+                <td><span>Superficie Cubierta Menor de: </span></td>
+                <td><input type="number" id="cubiertamenor"></td>
+            </tr>
+            <tr>
+                <td><span>Superficie Aire Mayor de: </span></td>
+                <td><input type="number" id="airemayor"></td>
+                <td>...</td>
+                <td><span>Superficie Aire Menor de: </span></td>
+                <td><input type="number" id="airemenor"></td>
+            </tr>
+            <tr>
+                <td><span>Superficie Solar Mayor de: </span></td>
+                <td><input type="number" id="solarmayor"></td>
+                <td>...</td>
+                <td><span>Superficie Solar Menor de: </span></td>
+                <td><input type="number" id="solarmenor"></td>
+            </tr>
+
+
+        </table>
+        <br><br>
+        <span>Esconder Columnas:</span><br>
         <input id="col-1" type="button" value="Nombre">
         <input id="col-2" type="button" value="Estado">
         <input id="col-3" type="button" value="Tipo">

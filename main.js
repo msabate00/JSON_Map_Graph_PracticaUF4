@@ -194,7 +194,7 @@ $(document).ready(function(){
     }
 
     function mostrarTabla(a){
-        $("table").remove();
+        $("table:eq(1)").remove();
          let st = "<table>";
         st += "<tr>";
         $.each(columnas, function(key, val){
