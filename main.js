@@ -227,7 +227,6 @@ $(document).ready(function(){
         crearOrden();
     }
     function esconderColumna(i){
-        //var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
         let aux = "";
         let css = "";
         switch(i){
