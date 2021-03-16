@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var items = [];
-    var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
+    //var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso_Silla_Ruedas":"true", "Superficie_Cubierta":"true", "Superficie_Aire":"true", "Superficie_Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia_Catastral":"true"};
     var url2020 = "https://datosabiertos.dip-badajoz.es/dataset/ceb25e50-45cc-4b4c-8103-a4a3ba88fce1/resource/2c5fe5b5-34c0-443c-935e-299f7c0f5e5c/download/instalacionesdeportivas2020.geojson";
     var url2019 = "https://datosabiertos.dip-badajoz.es/datos/urbanismo-e-infraestructuras/instalaciones-deportivas/Instalaciones_Deportivas.geojson";
     //console.log(columnas);
@@ -17,7 +17,8 @@ $(document).ready(function(){
 
     function peticio1(url){
         resetBotones();
-        columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
+       columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso_Silla_Ruedas":"true", "Superficie_Cubierta":"true", "Superficie_Aire":"true", "Superficie_Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia_Catastral":"true"};
+       ordenados = {"Nombre":"false","Estado":"false","Tipo":"false","Acceso_Silla_Ruedas":"false", "Superficie_Cubierta":"false", "Superficie_Aire":"false", "Superficie_Solar":"false", "Titularidad":"false", "Provincia":"false", "Municipio":"false", "Entidad":"false", "Orden":"false", "Referencia_Catastral":"false"};
 
         items = [];
         $.getJSON( url, function( data ) {
@@ -145,15 +146,15 @@ $(document).ready(function(){
                     delete transformado[i][key];
 
                 }else if(key.includes("ubierta")){
-                    transformado[i]["Superficie Cubierta"] = val;
+                    transformado[i]["Superficie_Cubierta"] = val;
                     delete transformado[i][key];
 
                 }else if(key.includes("ire")){
-                    transformado[i]["Superficie Aire"] = val;
+                    transformado[i]["Superficie_Aire"] = val;
                     delete transformado[i][key];
 
                 }else if(key.includes("olar")){
-                    transformado[i]["Superficie Solar"] = val;
+                    transformado[i]["Superficie_Solar"] = val;
                     delete transformado[i][key];
 
                 }else if(key.includes("atastral")){
@@ -161,11 +162,11 @@ $(document).ready(function(){
                     if(val == null){
                         val = "";
                     }
-                    transformado[i]["Referencia Catastral"] = val;
+                    transformado[i]["Referencia_Catastral"] = val;
                     delete transformado[i][key];
 
                 }else if(key.includes("uedas")){
-                    transformado[i]["Acceso Silla Ruedas"] = val;
+                    transformado[i]["Acceso_Silla_Ruedas"] = val;
                     delete transformado[i][key];
 
                 }else if(key.includes("estado")){
@@ -198,12 +199,13 @@ $(document).ready(function(){
         st += "<tr>";
         $.each(columnas, function(key, val){
             if(val == "true"){
-                st+="<th>" + key + "</th>";
+                let aux = key.replaceAll(" ", "_");
+                st+="<th>"+ "<input type='button' value=" + aux +" id="+ aux +">"+ "</th>";
+                let aux2 = "#" + aux;
             }
 
                });
         st +="</tr>";
-              // st += "<tr><th>Nombre</th><th>Estado</th><th>Tipo</th><th>Acceso Silla Ruedas</th><th>Superficie Cubierta</th><th>Superficie Aire</th><th>Superficie Solar</th><th>Titularidad</th><th>Provincia</th><th>Municipio</th><th>Entidad</th><th>Orden</th><th>Referencia Catastral</th></tr>";
         contador = 0;
         $.each(a, function(key, val){
             st += "<tr>";
@@ -214,22 +216,6 @@ $(document).ready(function(){
 
             });
             st += "</tr>";
-            /*
-            st+= "<tr>";
-            st += "<td>" + a[key]["Nombre"]+"</td>";
-            st += "<td>" + a[key]["Estado"]+"</td>";
-            st += "<td>" + a[key]["Tipo"]+"</td>";
-            st += "<td>" + a[key]["Acceso Silla Ruedas"]+"</td>";
-            st += "<td>" + a[key]["Superficie Cubierta"]+"</td>";
-            st += "<td>" + a[key]["Superficie Aire"]+"</td>";
-            st += "<td>" + a[key]["Superficie Solar"]+"</td>";
-            st += "<td>" + a[key]["Titularidad"]+"</td>";
-            st += "<td>" + a[key]["Provincia"]+"</td>";
-            st += "<td>" + a[key]["Municipio"]+"</td>";
-            st += "<td>" + a[key]["Entidad"]+"</td>";
-            st += "<td>" + a[key]["Orden"]+"</td>";
-            st += "<td>" + a[key]["Referencia Catastral"]+"</td>";
-            st += "</tr>";*/
             contador++;
             if(contador >= 50){
                 return false;
@@ -237,6 +223,8 @@ $(document).ready(function(){
         });
         st += "</table>";
         $("body").append(st);
+
+        crearOrden();
     }
     function esconderColumna(i){
         //var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso Silla Ruedas":"true", "Superficie Cubierta":"true", "Superficie Aire":"true", "Superficie Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia Catastral":"true"};
@@ -267,30 +255,30 @@ $(document).ready(function(){
                break;
            case "4":
               // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
-               columnas["Acceso Silla Ruedas"] = (columnas["Acceso Silla Ruedas"]=="true") ? "false" : "true";
+               columnas["Acceso_Silla_Ruedas"] = (columnas["Acceso_Silla_Ruedas"]=="true") ? "false" : "true";
                aux = "#col-" + i;
-               css = (columnas["Acceso Silla Ruedas"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               css = (columnas["Acceso_Silla_Ruedas"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
                $(aux).css(css);
                break;
            case "5":
               // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
-               columnas["Superficie Cubierta"] = (columnas["Superficie Cubierta"]=="true") ? "false" : "true";
+               columnas["Superficie_Cubierta"] = (columnas["Superficie_Cubierta"]=="true") ? "false" : "true";
                aux = "#col-" + i;
-               css = (columnas["Superficie Cubierta"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               css = (columnas["Superficie_Cubierta"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
                $(aux).css(css);
                break;
            case "6":
               // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
-               columnas["Superficie Aire"] = (columnas["Superficie Aire"]=="true") ? "false" : "true";
+               columnas["Superficie_Aire"] = (columnas["Superficie_Aire"]=="true") ? "false" : "true";
                aux = "#col-" + i;
-               css = (columnas["Superficie Aire"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               css = (columnas["Superficie_Aire"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
                $(aux).css(css);
                break;
            case "7":
               // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
-               columnas["Superficie Solar"] = (columnas["Superficie Solar"]=="true") ? "false" : "true";
+               columnas["Superficie_Solar"] = (columnas["Superficie_Solar"]=="true") ? "false" : "true";
                aux = "#col-" + i;
-               css = (columnas["Superficie Solar"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               css = (columnas["Superficie_Solar"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
                $(aux).css(css);
                break;
            case "8":
@@ -330,13 +318,93 @@ $(document).ready(function(){
                break;
            case "13":
               // if columnas["Nombre"]=="true" ? columnas["Nombre"]="false" : columnas["Nombre"] ="true";
-               columnas["Referencia Catastral"] = (columnas["Referencia Catastral"]=="true") ? "false" : "true";
+               columnas["Referencia_Catastral"] = (columnas["Referencia_Catastral"]=="true") ? "false" : "true";
                aux = "#col-" + i;
-               css = (columnas["Referencia Catastral"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
+               css = (columnas["Referencia_Catastral"]=="true") ? {backgroundColor: "", color: ""} : {backgroundColor: "red", color: "white"};
                $(aux).css(css);
                break;
        }
-        console.log(columnas);
+
+        mostrarTabla(items);
+
+    }
+
+    function crearOrden(){
+        $.each(columnas, function(key, val){
+            if(val == "true"){
+                let aux = key.replaceAll(" ", "_");
+                //st+="<th>"+ "<input type='button' value=" + aux +" id="+ aux +">"+ "</th>";
+                let aux2 = "#" + aux;
+                $(aux2).click(
+                    function(){
+
+                        OrdenarPor(aux);
+                    }
+                );
+            }
+
+               });
+    }
+
+    function OrdenarPor(columna){
+
+
+        switch(columna){
+                case "Nombre":
+
+                    items = items.sort(function(a,b){return a.Nombre.localeCompare(b.Nombre);});
+                    break;
+                case "Estado":
+                    items = items.sort(function(a,b){return a.Estado.localeCompare(b.Estado);});
+                    break;
+                case "Tipo":
+                    items = items.sort(function(a,b){return a.Tipo.localeCompare(b.Tipo);});
+                    break;
+                case "Acceso_Silla_Ruedas":
+                    items = items.sort(function(a,b){return a.Acceso_Silla_Ruedas.localeCompare(b.Acceso_Silla_Ruedas);});
+                    break;
+                case "Superficie_Cubierta":
+                    items = items.sort(function(a,b){return a.Superficie_Cubierta - b.Superficie_Cubierta;});
+                    break;
+                case "Superficie_Aire":
+                    items = items.sort(function(a,b){return a.Superficie_Aire - b.Superficie_Aire;});
+                    break;
+                case "Superficie_Solar":
+                    items = items.sort(function(a,b){return a.Superficie_Solar - b.Superficie_Solar;});
+                    break;
+                case "Titularidad":
+
+               // console.log(aux.sort(function(a,b){return a.name.localeCompare(b.name)}));
+                    items = items.sort(function(a,b){return a.Titularidad.localeCompare(b.Titularidad);});
+                    break;
+                case "Provincia":
+                    items = items.sort(function(a,b){return a.Provincia - b.Provincia;});
+                    break;
+                case "Municipio":
+                    items = items.sort(function(a,b){return a.Municipio - b.Municipio;});
+                    break;
+                case "Entidad":
+                    items = items.sort(function(a,b){return a.Entidad - b.Entidad;});
+                    break;
+                case "Orden":
+                    items = items.sort(function(a,b){return a.Orden - b.Orden;});
+                    break;
+                case "Referencia_Catastral":
+                    items = items.sort(function(a,b){return a.Referencia_Catastral.localeCompare(b.Referencia_Catastral);});
+                    break;
+        }
+
+        switch(ordenados[columna]){
+            case "true":
+                items = items.reverse();
+                ordenados[columna] = "false";
+                break;
+            case "false":
+                ordenados[columna] = "true";
+                break;
+
+        }
+
         mostrarTabla(items);
 
     }
