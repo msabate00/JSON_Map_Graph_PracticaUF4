@@ -1,0 +1,10 @@
+#contenido > tbody > tr > td{
+    min-width: 100px;
+    text-align: center;
+    border: solid 3px black;
+
+}
+table{
+    border-spacing: 0px;
+    border-collapse: collapse;
+}

@@ -13,6 +13,9 @@ $(document).ready(function(){
         function(){
            peticio1(url2019)
     });
+    $("#filtrarbut").click(function(){
+        filtrar();
+    });
 
 
     function peticio1(url){
@@ -195,7 +198,7 @@ $(document).ready(function(){
 
     function mostrarTabla(a){
         $("table:eq(1)").remove();
-         let st = "<table>";
+         let st = "<table id='contenido'>";
         st += "<tr>";
         $.each(columnas, function(key, val){
             if(val == "true"){
@@ -405,6 +408,31 @@ $(document).ready(function(){
         }
 
         mostrarTabla(items);
+
+    }
+
+
+    function filtrar(){
+    let filtrado = items.slice();
+    let resta = 0;
+        console.log(items.length);
+        if($("#estadoFiltro :selected").val() != ""){
+            for(let i = 0; i<filtrado.length; i++){
+                if(filtrado[i].Estado != $("#estadoFiltro :selected").val()){
+                    filtrado.splice(i,1);
+                    i--;
+                }
+            }
+        }
+        if($("#tipoFiltro :selected").val() != ""){
+            for(let i = 0; i<filtrado.length; i++){
+                if(filtrado[i].Tipo != $("#tipoFiltro :selected").val()){
+                    filtrado.splice(i,1);
+                    i--;
+                }
+            }
+        }
+    mostrarTabla(filtrado);
 
     }
 

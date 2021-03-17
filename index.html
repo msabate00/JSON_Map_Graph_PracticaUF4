@@ -1,6 +1,7 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     </head>
     <body>
         <input id="2020" type="button" value="2020">
@@ -11,7 +12,7 @@
             <tr>
                 <td><span>Estado</span></td>
                 <td>
-                    <select>
+                    <select id="estadoFiltro">
                         <option value="">Seleccionar</option>
                         <option value="Bueno">Bueno</option>
                         <option value="Regular">Regular</option>
@@ -21,19 +22,19 @@
                 <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
                 <td>Tipo</td>
                 <td>
-                    <select>
+                    <select id="tipoFiltro">
                         <option value="">Seleccionar</option>
-                        <option>Pistas polideportivas</option>
-                        <option>Complejos polideportivos</option>
-                        <option>Terrenos de juego</option>
-                        <option>Gimnasio</option>
-                        <option>Piscinas al aire libre</option>
-                        <option>Piscinas cubiertas</option>
-                        <option>Otros</option>
+                        <option value="Pistas polideportivas">Pistas polideportivas</option>
+                        <option value="Complejos polideportivos">Complejos polideportivos</option>
+                        <option value="Terrenos de juego">Terrenos de juego</option>
+                        <option value="Gimnasio">Gimnasio</option>
+                        <option value="Piscinas al aire libre">Piscinas al aire libre</option>
+                        <option value="Piscinas cubiertas">Piscinas cubiertas</option>
+                        <option value="Otros">Otros</option>
                     </select>
                 </td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td><span>Acceso Silla de Ruedas</span></td>
                 <td>
                     <select>
@@ -88,9 +89,9 @@
                         <option>Sin</option>
                     </select>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
-            <td><input type="button" value="Filtrar"></td>
+            <td><input type="button" value="Filtrar" id="filtrarbut"></td>
             </tr>
 
 
