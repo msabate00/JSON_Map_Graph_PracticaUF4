@@ -19,6 +19,10 @@ $(document).ready(function(){
 
 
     function peticio1(url){
+
+
+
+
         resetBotones();
        columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso_Silla_Ruedas":"true", "Superficie_Cubierta":"true", "Superficie_Aire":"true", "Superficie_Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia_Catastral":"true"};
        ordenados = {"Nombre":"false","Estado":"false","Tipo":"false","Acceso_Silla_Ruedas":"false", "Superficie_Cubierta":"false", "Superficie_Aire":"false", "Superficie_Solar":"false", "Titularidad":"false", "Provincia":"false", "Municipio":"false", "Entidad":"false", "Orden":"false", "Referencia_Catastral":"false"};
@@ -173,6 +177,9 @@ $(document).ready(function(){
                     delete transformado[i][key];
 
                 }else if(key.includes("estado")){
+                    if(val == "Mal"){
+                        val = "Malo";
+                    }
                     transformado[i]["Estado"] = val;
                     delete transformado[i][key];
 
@@ -225,8 +232,9 @@ $(document).ready(function(){
             }
         });
         st += "</table>";
-        $("body").append(st);
+        $("#TablaIni").append(st);
 
+        GenerarGrafica();
         crearOrden();
     }
     function esconderColumna(i){
@@ -452,5 +460,52 @@ $(document).ready(function(){
         $("#col-13").off();
 
     }
+
+    function GenerarGrafica(){
+        console.log("AAAA");
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+        let Malo = 0;
+        let Bueno = 0;
+        let Regular = 0;
+
+            for(let i = 0; i<items.length; i++){
+                if(items[i].Estado == "Bueno"){
+                    Bueno++;
+                }else if (items[i].Estado == "Malo"){
+                    Malo++;
+                }else if (items[i].Estado == "Regular"){
+                    Regular++;
+                }
+            }
+
+
+
+
+        var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+          ['Malo', Malo],
+          ['Bueno',     Bueno],
+          ['Regular',      Regular]
+
+        ]);
+
+        var options = {
+          title: 'Estados de los Polideportivos',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+
+
+
+
+    }
+
+
 
 });

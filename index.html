@@ -1,6 +1,7 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     </head>
     <body>
@@ -112,7 +113,11 @@
         <input id="col-12" type="button" value="Orden">
         <input id="col-13" type="button" value="Referencia Catastral">
         <br><br>
-        <h2>Tabla:</h2>
+        <h2 id="TablaIni">Tabla:</h2>
+
+            <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+            <div id="MapaIni"></div>
 
         <script src="main.js"></script>
     </body>
