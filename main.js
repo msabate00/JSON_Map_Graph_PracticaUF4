@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var items = [];
+    var mapa = [];
     //var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso_Silla_Ruedas":"true", "Superficie_Cubierta":"true", "Superficie_Aire":"true", "Superficie_Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia_Catastral":"true"};
     var url2020 = "https://datosabiertos.dip-badajoz.es/dataset/ceb25e50-45cc-4b4c-8103-a4a3ba88fce1/resource/2c5fe5b5-34c0-443c-935e-299f7c0f5e5c/download/instalacionesdeportivas2020.geojson";
     var url2019 = "https://datosabiertos.dip-badajoz.es/datos/urbanismo-e-infraestructuras/instalaciones-deportivas/Instalaciones_Deportivas.geojson";
@@ -28,6 +29,7 @@ $(document).ready(function(){
        ordenados = {"Nombre":"false","Estado":"false","Tipo":"false","Acceso_Silla_Ruedas":"false", "Superficie_Cubierta":"false", "Superficie_Aire":"false", "Superficie_Solar":"false", "Titularidad":"false", "Provincia":"false", "Municipio":"false", "Entidad":"false", "Orden":"false", "Referencia_Catastral":"false"};
 
         items = [];
+        mapa = [];
         $.getJSON( url, function( data ) {
             $.each(data.features, function(key, val){
                items.push(val);
@@ -36,6 +38,7 @@ $(document).ready(function(){
         .done(
             function(){
 
+                //console.log(items);
                 items = TransformarArray(items);
                 mostrarTabla(items);
 
@@ -109,11 +112,17 @@ $(document).ready(function(){
 
 
     function TransformarArray(a){
+
         let transformado = [];
         for(let i = 0; i<a.length; i++){
             transformado.push(a[i].properties);
+            if(typeof a[i].properties.nombre === "undefined"){
+                 mapa.push([a[i].properties.ba_nombreInstalacionDeportiva,a[i].geometry.coordinates[0][0][0], a[i].geometry.coordinates[0][0][1]]);
+            }else{
+                 mapa.push([a[i].properties.nombre,a[i].geometry.coordinates[0][0][0][0], a[i].geometry.coordinates[0][0][0][1]]);
+            }
         }
-
+ console.log(mapa);
         for(let i = 0; i<transformado.length; i++){
             $.each(transformado[i], function(key, val){
                 if(key.includes("rovincia")){
@@ -235,6 +244,7 @@ $(document).ready(function(){
         $("#TablaIni").append(st);
 
         GenerarGrafica();
+        GenerarMapa();
         crearOrden();
     }
     function esconderColumna(i){
@@ -501,6 +511,24 @@ $(document).ready(function(){
         chart.draw(data, options);
       }
 
+
+
+
+    }
+
+    function GenerarMapa(){
+        var map = L.map('mapid').setView([38.547889, -6.221099], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+            }).addTo(map);
+
+        for(let i = 0; i<50; i++){
+              L.marker([mapa[i][2], mapa[i][1]]).addTo(map)
+        .bindPopup(mapa[i][0])
+        .openPopup();
+        }
 
 
 

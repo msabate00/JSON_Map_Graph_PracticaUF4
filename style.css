@@ -8,3 +8,4 @@ table{
     border-spacing: 0px;
     border-collapse: collapse;
 }
+#mapid { height: 600px; margin-bottom: 100px; }
