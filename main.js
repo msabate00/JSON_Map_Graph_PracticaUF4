@@ -1,6 +1,9 @@
 $(document).ready(function(){
     var items = [];
     var mapa = [];
+    var markers = [];
+    var Instanciado = false;
+    var map;
     //var columnas = {"Nombre":"true","Estado":"true","Tipo":"true","Acceso_Silla_Ruedas":"true", "Superficie_Cubierta":"true", "Superficie_Aire":"true", "Superficie_Solar":"true", "Titularidad":"true", "Provincia":"true", "Municipio":"true", "Entidad":"true", "Orden":"true", "Referencia_Catastral":"true"};
     var url2020 = "https://datosabiertos.dip-badajoz.es/dataset/ceb25e50-45cc-4b4c-8103-a4a3ba88fce1/resource/2c5fe5b5-34c0-443c-935e-299f7c0f5e5c/download/instalacionesdeportivas2020.geojson";
     var url2019 = "https://datosabiertos.dip-badajoz.es/datos/urbanismo-e-infraestructuras/instalaciones-deportivas/Instalaciones_Deportivas.geojson";
@@ -122,7 +125,7 @@ $(document).ready(function(){
                  mapa.push([a[i].properties.nombre,a[i].geometry.coordinates[0][0][0][0], a[i].geometry.coordinates[0][0][0][1]]);
             }
         }
- console.log(mapa);
+
         for(let i = 0; i<transformado.length; i++){
             $.each(transformado[i], function(key, val){
                 if(key.includes("rovincia")){
@@ -517,17 +520,28 @@ $(document).ready(function(){
     }
 
     function GenerarMapa(){
-        var map = L.map('mapid').setView([38.547889, -6.221099], 8);
 
+
+        if(!Instanciado){
+             map = L.map('mapid').setView([38.547889, -6.221099], 8);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
             }).addTo(map);
+            Instanciado = true;
+        }
+
+      if(markers.length > 0){
+          for(let i = 0; i<markers.length; i++){
+              map.removeLayer(markers[i]);
+          }
+      }
+
+
 
         for(let i = 0; i<50; i++){
-              L.marker([mapa[i][2], mapa[i][1]]).addTo(map)
-        .bindPopup(mapa[i][0])
-        .openPopup();
+            let marker = L.marker([mapa[i][2], mapa[i][1]]).addTo(map).bindPopup(mapa[i][0]);
+            markers.push(marker);
         }
 
 
