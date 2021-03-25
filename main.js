@@ -216,7 +216,7 @@ $(document).ready(function(){
     }
 
     function mostrarTabla(a){
-        $("table:eq(1)").remove();
+        $("#contenido").remove();
          let st = "<table id='contenido'>";
         st += "<tr>";
         $.each(columnas, function(key, val){
@@ -475,7 +475,10 @@ $(document).ready(function(){
     }
 
     function GenerarGrafica(){
-        console.log("AAAA");
+
+
+
+        //EL 3D PIE ///////////////////////////////////////////////////////////
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -513,6 +516,67 @@ $(document).ready(function(){
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         chart.draw(data, options);
       }
+
+        //EL 3D PIE ///////////////////////////////////////////////////////////
+        //COLUMNAS ///////////////////////////////////////////////////////////
+
+
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawMaterial);
+
+        function drawMaterial() {
+              var data = new google.visualization.DataTable();
+              data.addColumn('number', 'Posicion');
+              data.addColumn('number', 'M²');
+            let datos = [];
+
+              for(let i = 0; i<items.length; i++){
+               datos.push([{v: i, f: items[i].Nombre}, items[i].Superficie_Cubierta]);
+                  if(i > 50){
+                      break;
+                  }
+            }
+            console.log(datos);
+             /* data.addRows([
+                [{v: [1], f: '8 am'}, 1],
+                [{v: [9], f: '9 am'}, 2],
+                [{v: [10], f:'10 am'}, 3],
+                [{v: [11], f: '11 am'}, 4],
+                [{v: [12], f: '12 pm'}, 5],
+                [{v: [13], f: '1 pm'}, 6],
+                [{v: [14], f: '2 pm'}, 7],
+                [{v: [15], f: '3 pm'}, 8],
+                [{v: [16], f: '4 pm'}, 9],
+                [{v: [17], f: '5 pm'}, 10],
+              ]);*/
+            data.addRows(datos);
+
+              var options = {
+                title: 'Superficie Cubierta',
+                hAxis: {
+                  title: '',
+                  //format: 'h:mm a',
+                  viewWindow: {
+                    min: [7, 3, 0],
+                    max: [6000000, 6000000, 0]
+                  }
+                },
+                vAxis: {
+                  title: ''
+                }
+              };
+
+              var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+              materialChart.draw(data, options);
+            }
+
+
+
+
+
+
+
+        //COLUMNAS ///////////////////////////////////////////////////////////
 
 
 
