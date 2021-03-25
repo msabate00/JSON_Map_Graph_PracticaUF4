@@ -532,7 +532,7 @@ $(document).ready(function(){
 
               for(let i = 0; i<items.length; i++){
                datos.push([{v: i, f: items[i].Nombre}, items[i].Superficie_Cubierta]);
-                  if(i > 50){
+                  if(i > 250){
                       break;
                   }
             }
