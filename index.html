@@ -11,100 +11,56 @@
    crossorigin=""></script>
     </head>
     <body>
+        <div>
+            <h1 style="
+    text-align-last: center;">INSTALACIONES DEPORTIVAS DE BADAJOZ</h1>
+        </div>
+         <h2>Seleccionar Año:</h2><br>
         <input id="2020" type="button" value="2020">
         <input id="2019" type="button" value="2019">
         <br><br>
-         <span>Filtros:</span><br>
-        <table id="tablaFiltros">
-            <tr>
-                <td><span>Estado</span></td>
-                <td>
-                    <select id="estadoFiltro">
-                        <option value="">Seleccionar</option>
-                        <option value="Bueno">Bueno</option>
-                        <option value="Regular">Regular</option>
-                        <option value="Malo">Malo</option>
-                    </select>
-                </td>
-                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                <td>Tipo</td>
-                <td>
-                    <select id="tipoFiltro">
-                        <option value="">Seleccionar</option>
-                        <option value="Pistas polideportivas">Pistas polideportivas</option>
-                        <option value="Complejos polideportivos">Complejos polideportivos</option>
-                        <option value="Terrenos de juego">Terrenos de juego</option>
-                        <option value="Gimnasio">Gimnasio</option>
-                        <option value="Piscinas al aire libre">Piscinas al aire libre</option>
-                        <option value="Piscinas cubiertas">Piscinas cubiertas</option>
-                        <option value="Otros">Otros</option>
-                    </select>
-                </td>
-            </tr>
-            <!--<tr>
-                <td><span>Acceso Silla de Ruedas</span></td>
-                <td>
-                    <select>
-                        <option value="">Seleccionar</option>
-                        <option>Si</option>
-                        <option>No</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><span>Superficie Cubierta Mayor de: </span></td>
-                <td><input type="number" id="cubiertamayor"></td>
-                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                <td><span>Superficie Cubierta Menor de: </span></td>
-                <td><input type="number" id="cubiertamenor"></td>
-            </tr>
-            <tr>
-                <td><span>Superficie Aire Mayor de: </span></td>
-                <td><input type="number" id="airemayor"></td>
-                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                <td><span>Superficie Aire Menor de: </span></td>
-                <td><input type="number" id="airemenor"></td>
-            </tr>
-            <tr>
-                <td><span>Superficie Solar Mayor de: </span></td>
-                <td><input type="number" id="solarmayor"></td>
-                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                <td><span>Superficie Solar Menor de: </span></td>
-                <td><input type="number" id="solarmenor"></td>
-            </tr>
-
-            <tr>
-                <td><span>Titularidad</span></td>
-                <td>
-                    <select>
-                        <option value="">Seleccionar</option>
-                        <option>Municipal</option>
-                        <option>Privada</option>
-                        <option>Consorcio</option>
-                        <option>Empresa Municipal</option>
-                        <option>Empresa Pública no municipal</option>
-                        <option>Comunidad Autónoma</option>
-                        <option>Otras</option>
-                    </select>
-                </td>
-                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
-                <td><span>Referencia Catastral</span></td>
-                <td>
-                    <select>
-                        <option value="">Seleccionar</option>
-                        <option>Con</option>
-                        <option>Sin</option>
-                    </select>
-                </td>
-            </tr>-->
-            <tr>
-            <td><input type="button" value="Filtrar" id="filtrarbut"></td>
-            </tr>
+         <h2>Filtros:</h2><br>
+        <div class="cuadroFiltros">
+            <table id="tablaFiltros">
+                <tr>
+                    <td style="text-align: end;"><span>Estado</span></td>
+                    <td>
+                        <select id="estadoFiltro">
+                            <option value="">Seleccionar</option>
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        </select>
+                    </td>
+                    <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+                    <td>Tipo</td>
+                    <td>
+                        <select id="tipoFiltro">
+                            <option value="">Seleccionar</option>
+                            <option value="Pistas polideportivas">Pistas polideportivas</option>
+                            <option value="Complejos polideportivos">Complejos polideportivos</option>
+                            <option value="Terrenos de juego">Terrenos de juego</option>
+                            <option value="Gimnasio">Gimnasio</option>
+                            <option value="Piscinas al aire libre">Piscinas al aire libre</option>
+                            <option value="Piscinas cubiertas">Piscinas cubiertas</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <td style="padding-top: 50px; text-align: end;"><input type="button" value="Filtrar" id="filtrarbut"></td>
+                </tr>
 
 
-        </table>
+            </table>
+        </div>
+
         <br><br>
-        <span>Esconder Columnas:</span><br>
+        <h2>Esconder Columnas:</h2><br>
         <input id="col-1" type="button" value="Nombre">
         <input id="col-2" type="button" value="Estado">
         <input id="col-3" type="button" value="Tipo">
@@ -119,15 +75,18 @@
         <input id="col-12" type="button" value="Orden">
         <input id="col-13" type="button" value="Referencia Catastral">
         <br><br>
-        <h2 id="TablaIni">Tabla:</h2>
+        <h2 id="TablaIni"></h2>
 
-        <table>
-            <tr>
-                <td><div id="piechart_3d" style="width: 900px; height: 500px;"></div></td>
-                <td><div id="chart_div" style="width: 900px; height: 500px;"></div></td>
+        <div id="graficas">
+            <table>
+                <tr>
+                    <td><div id="piechart_3d" style="width: 450px; height: 450px;"></div></td>
+                    <td><div id="chart_div" style="width: 900px; height: 450px;"></div></td>
 
-            </tr>
-        </table>
+                </tr>
+            </table>
+        </div>
+
 
 
              <div id="mapid"></div>

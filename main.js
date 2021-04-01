@@ -229,8 +229,16 @@ $(document).ready(function(){
                });
         st +="</tr>";
         contador = 0;
+        par = false;
         $.each(a, function(key, val){
-            st += "<tr>";
+            if(!par){
+                st += "<tr>";
+                par = true;
+            }else{
+                st += "<tr class='par'>";
+                par = false;
+            }
+
             $.each(columnas, function(key2, val2){
                 if(val2 == "true"){
                     st+= "<td>" + a[key][key2] + "</td>";
@@ -475,6 +483,9 @@ $(document).ready(function(){
     }
 
     function GenerarGrafica(){
+        $("#graficas").css({'background-color':
+                           "white", 'padding': "15px",
+                           'border':"solid black 3px", 'width':"fit-content", 'margin-bottom':"20px", 'margin-top':"20px"});
 
 
 
@@ -510,6 +521,7 @@ $(document).ready(function(){
 
         var options = {
           title: 'Estados de los Polideportivos',
+          backgroundColor: 'transparent',
           is3D: true,
         };
 
@@ -526,7 +538,7 @@ $(document).ready(function(){
 
         function drawMaterial() {
               var data = new google.visualization.DataTable();
-              data.addColumn('number', 'Posicion');
+              data.addColumn('number', 'Superficie Cubierta');
               data.addColumn('number', 'M²');
             let datos = [];
 
@@ -553,6 +565,7 @@ $(document).ready(function(){
 
               var options = {
                 title: 'Superficie Cubierta',
+                   backgroundColor: 'transparent',
                 hAxis: {
                   title: '',
                   //format: 'h:mm a',
@@ -584,7 +597,9 @@ $(document).ready(function(){
     }
 
     function GenerarMapa(){
-
+        $("#mapid").css({'background-color':
+                           "white", 'padding': "15px",
+                           'border':"solid black 3px", 'margin-bottom':"20px"});
 
         if(!Instanciado){
              map = L.map('mapid').setView([38.547889, -6.221099], 8);

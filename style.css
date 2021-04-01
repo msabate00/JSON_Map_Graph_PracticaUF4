@@ -1,3 +1,27 @@
+
+html{
+    background-color: #ff979775;
+
+}
+h2{
+    margin-bottom: -10px;
+}
+
+input[type=button], select{
+    transition: 0.4s;
+    background-color: white;
+    border-radius: 0px;
+    border: solid black 2px;
+    padding: 10px 25px 10px 25px;
+    margin: 3px;
+}
+input[type=button]:hover{
+    background-color: #d8d8d8;
+    transform: scale(0.9,0.9);
+}
+select:hover{
+    background-color: #d8d8d8;
+}
 #contenido > tbody > tr > td{
     min-width: 100px;
     text-align: center;
@@ -8,4 +32,28 @@ table{
     border-spacing: 0px;
     border-collapse: collapse;
 }
-#mapid { height: 600px; margin-bottom: 100px; }
+#mapid {
+    height: 600px; margin-bottom: 100px;
+    transition: 0;
+
+}
+
+#filtrarbut{
+    transition: 0.4s;
+    background-color: aquamarine;
+}
+#filtrarbut:hover{
+    background-color: #56ffc6;
+}
+.cuadroFiltros{
+    background-color: white;
+    padding: 15px;
+    border: solid black 3px;
+    width: fit-content;
+}
+.par{
+    background-color: #ff9898ba;
+}
+#piechart_3d{
+    padding: 20px 20px 0px 0px;
+}
